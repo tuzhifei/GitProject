@@ -18,6 +18,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor redColor];
+    UIView *view = [[UIView alloc]init];
+    view.frame = self.view.bounds;
+    [self.view addSubview:view];
 }
 
 
