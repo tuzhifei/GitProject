@@ -3,12 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4D3D3B4322F01C2D00024A97 /* UIColor+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B3F22F01C2D00024A97 /* UIColor+Extention.m */; };
 		4D3D3B4422F01C2D00024A97 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B4022F01C2D00024A97 /* UIView+Frame.m */; };
+		4D3D3B4922F0228B00024A97 /* BaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B4822F0228B00024A97 /* BaseCollectionViewCell.m */; };
+		4D3D3B4C22F0231600024A97 /* CardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B4B22F0231600024A97 /* CardCollectionViewCell.m */; };
+		4D3D3B5022F0447400024A97 /* BarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B4F22F0447400024A97 /* BarCollectionViewCell.m */; };
+		4D3D3B5322F044F000024A97 /* GitProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B5222F044F000024A97 /* GitProject.swift */; };
+		4D3D3B5622F0492F00024A97 /* PieCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B5522F0492F00024A97 /* PieCollectionViewCell.m */; };
+		4D3D3B5D22F049CB00024A97 /* SKUModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B5922F049CB00024A97 /* SKUModel.m */; };
+		4D3D3B6322F04CBB00024A97 /* PurchaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B6122F04CBB00024A97 /* PurchaseModel.m */; };
+		4D3D3B6622F04D5000024A97 /* CountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B6522F04D5000024A97 /* CountTableViewCell.m */; };
+		4D3D3B6922F0562500024A97 /* PageCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B6822F0562500024A97 /* PageCollectionView.m */; };
 		4D59082122EAABD0006E0657 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D59082022EAABD0006E0657 /* AppDelegate.m */; };
 		4D59082422EAABD0006E0657 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D59082322EAABD0006E0657 /* ViewController.m */; };
 		4D59082722EAABD0006E0657 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D59082522EAABD0006E0657 /* Main.storyboard */; };
@@ -17,6 +26,7 @@
 		4D59082F22EAABD0006E0657 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D59082E22EAABD0006E0657 /* main.m */; };
 		4D59083922EAABD0006E0657 /* GitProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D59083822EAABD0006E0657 /* GitProjectTests.m */; };
 		4D59084422EAABD0006E0657 /* GitProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D59084322EAABD0006E0657 /* GitProjectUITests.m */; };
+		8ADD0A2A378A728F9CFFF34D /* Pods_GitProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8546023AB273620EE0FB7F /* Pods_GitProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,11 +47,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E8546023AB273620EE0FB7F /* Pods_GitProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D3D3B3F22F01C2D00024A97 /* UIColor+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extention.m"; sourceTree = "<group>"; };
 		4D3D3B4022F01C2D00024A97 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		4D3D3B4122F01C2D00024A97 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		4D3D3B4222F01C2D00024A97 /* UIColor+Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extention.h"; sourceTree = "<group>"; };
 		4D3D3B4522F01C6600024A97 /* GitProject.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitProject.pch; sourceTree = "<group>"; };
+		4D3D3B4722F0228B00024A97 /* BaseCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCollectionViewCell.h; sourceTree = "<group>"; };
+		4D3D3B4822F0228B00024A97 /* BaseCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCollectionViewCell.m; sourceTree = "<group>"; };
+		4D3D3B4A22F0231600024A97 /* CardCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardCollectionViewCell.h; sourceTree = "<group>"; };
+		4D3D3B4B22F0231600024A97 /* CardCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardCollectionViewCell.m; sourceTree = "<group>"; };
+		4D3D3B4D22F0236700024A97 /* GitProject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitProject.h; sourceTree = "<group>"; };
+		4D3D3B4E22F0447400024A97 /* BarCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BarCollectionViewCell.h; sourceTree = "<group>"; };
+		4D3D3B4F22F0447400024A97 /* BarCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BarCollectionViewCell.m; sourceTree = "<group>"; };
+		4D3D3B5122F044F000024A97 /* GitProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GitProject-Bridging-Header.h"; sourceTree = "<group>"; };
+		4D3D3B5222F044F000024A97 /* GitProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitProject.swift; sourceTree = "<group>"; };
+		4D3D3B5422F0492F00024A97 /* PieCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PieCollectionViewCell.h; sourceTree = "<group>"; };
+		4D3D3B5522F0492F00024A97 /* PieCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PieCollectionViewCell.m; sourceTree = "<group>"; };
+		4D3D3B5922F049CB00024A97 /* SKUModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUModel.m; sourceTree = "<group>"; };
+		4D3D3B5A22F049CB00024A97 /* SKUModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUModel.h; sourceTree = "<group>"; };
+		4D3D3B6122F04CBB00024A97 /* PurchaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseModel.m; sourceTree = "<group>"; };
+		4D3D3B6222F04CBB00024A97 /* PurchaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseModel.h; sourceTree = "<group>"; };
+		4D3D3B6422F04D5000024A97 /* CountTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountTableViewCell.h; sourceTree = "<group>"; };
+		4D3D3B6522F04D5000024A97 /* CountTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountTableViewCell.m; sourceTree = "<group>"; };
+		4D3D3B6722F0562500024A97 /* PageCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageCollectionView.h; sourceTree = "<group>"; };
+		4D3D3B6822F0562500024A97 /* PageCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageCollectionView.m; sourceTree = "<group>"; };
 		4D59081C22EAABD0006E0657 /* GitProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D59081F22EAABD0006E0657 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4D59082022EAABD0006E0657 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -58,6 +88,8 @@
 		4D59083F22EAABD0006E0657 /* GitProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D59084322EAABD0006E0657 /* GitProjectUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitProjectUITests.m; sourceTree = "<group>"; };
 		4D59084522EAABD0006E0657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E21022F6CE25365DCCE4E602 /* Pods-GitProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitProject.debug.xcconfig"; path = "Target Support Files/Pods-GitProject/Pods-GitProject.debug.xcconfig"; sourceTree = "<group>"; };
+		FD80FA25C33DC6B5A33F6AE0 /* Pods-GitProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitProject.release.xcconfig"; path = "Target Support Files/Pods-GitProject/Pods-GitProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ADD0A2A378A728F9CFFF34D /* Pods_GitProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +118,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D3D3B4622F0226B00024A97 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4D3D3B4722F0228B00024A97 /* BaseCollectionViewCell.h */,
+				4D3D3B4822F0228B00024A97 /* BaseCollectionViewCell.m */,
+				4D3D3B4A22F0231600024A97 /* CardCollectionViewCell.h */,
+				4D3D3B4B22F0231600024A97 /* CardCollectionViewCell.m */,
+				4D3D3B4E22F0447400024A97 /* BarCollectionViewCell.h */,
+				4D3D3B4F22F0447400024A97 /* BarCollectionViewCell.m */,
+				4D3D3B5422F0492F00024A97 /* PieCollectionViewCell.h */,
+				4D3D3B5522F0492F00024A97 /* PieCollectionViewCell.m */,
+				4D3D3B6422F04D5000024A97 /* CountTableViewCell.h */,
+				4D3D3B6522F04D5000024A97 /* CountTableViewCell.m */,
+				4D3D3B6722F0562500024A97 /* PageCollectionView.h */,
+				4D3D3B6822F0562500024A97 /* PageCollectionView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4D3D3B5722F049B900024A97 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4D3D3B6222F04CBB00024A97 /* PurchaseModel.h */,
+				4D3D3B6122F04CBB00024A97 /* PurchaseModel.m */,
+				4D3D3B5A22F049CB00024A97 /* SKUModel.h */,
+				4D3D3B5922F049CB00024A97 /* SKUModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4D59081322EAABD0006E0657 = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +155,8 @@
 				4D59083722EAABD0006E0657 /* GitProjectTests */,
 				4D59084222EAABD0006E0657 /* GitProjectUITests */,
 				4D59081D22EAABD0006E0657 /* Products */,
+				F81E687D44BAE61AA896A0FE /* Pods */,
+				6062EEDE4AA950FFEAA1B6D9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +173,8 @@
 		4D59081E22EAABD0006E0657 /* GitProject */ = {
 			isa = PBXGroup;
 			children = (
+				4D3D3B5722F049B900024A97 /* Model */,
+				4D3D3B4622F0226B00024A97 /* View */,
 				4D59081F22EAABD0006E0657 /* AppDelegate.h */,
 				4D59082022EAABD0006E0657 /* AppDelegate.m */,
 				4D59082222EAABD0006E0657 /* ViewController.h */,
@@ -122,6 +189,9 @@
 				4D59082D22EAABD0006E0657 /* Info.plist */,
 				4D59082E22EAABD0006E0657 /* main.m */,
 				4D3D3B4522F01C6600024A97 /* GitProject.pch */,
+				4D3D3B4D22F0236700024A97 /* GitProject.h */,
+				4D3D3B5222F044F000024A97 /* GitProject.swift */,
+				4D3D3B5122F044F000024A97 /* GitProject-Bridging-Header.h */,
 			);
 			path = GitProject;
 			sourceTree = "<group>";
@@ -144,6 +214,23 @@
 			path = GitProjectUITests;
 			sourceTree = "<group>";
 		};
+		6062EEDE4AA950FFEAA1B6D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1E8546023AB273620EE0FB7F /* Pods_GitProject.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F81E687D44BAE61AA896A0FE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E21022F6CE25365DCCE4E602 /* Pods-GitProject.debug.xcconfig */,
+				FD80FA25C33DC6B5A33F6AE0 /* Pods-GitProject.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,9 +238,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4D59084822EAABD0006E0657 /* Build configuration list for PBXNativeTarget "GitProject" */;
 			buildPhases = (
+				020943F3A96906024B250892 /* [CP] Check Pods Manifest.lock */,
 				4D59081822EAABD0006E0657 /* Sources */,
 				4D59081922EAABD0006E0657 /* Frameworks */,
 				4D59081A22EAABD0006E0657 /* Resources */,
+				8C94B93B50457E8E504BA14D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -211,6 +300,7 @@
 				TargetAttributes = {
 					4D59081B22EAABD0006E0657 = {
 						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1030;
 					};
 					4D59083322EAABD0006E0657 = {
 						CreatedOnToolsVersion = 10.3;
@@ -269,16 +359,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		020943F3A96906024B250892 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GitProject-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C94B93B50457E8E504BA14D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GitProject/Pods-GitProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GitProject/Pods-GitProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GitProject/Pods-GitProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4D59081822EAABD0006E0657 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				4D3D3B4322F01C2D00024A97 /* UIColor+Extention.m in Sources */,
+				4D3D3B4922F0228B00024A97 /* BaseCollectionViewCell.m in Sources */,
+				4D3D3B6322F04CBB00024A97 /* PurchaseModel.m in Sources */,
 				4D59082422EAABD0006E0657 /* ViewController.m in Sources */,
 				4D59082F22EAABD0006E0657 /* main.m in Sources */,
+				4D3D3B6922F0562500024A97 /* PageCollectionView.m in Sources */,
+				4D3D3B6622F04D5000024A97 /* CountTableViewCell.m in Sources */,
 				4D3D3B4422F01C2D00024A97 /* UIView+Frame.m in Sources */,
+				4D3D3B5322F044F000024A97 /* GitProject.swift in Sources */,
+				4D3D3B4C22F0231600024A97 /* CardCollectionViewCell.m in Sources */,
+				4D3D3B5022F0447400024A97 /* BarCollectionViewCell.m in Sources */,
+				4D3D3B5D22F049CB00024A97 /* SKUModel.m in Sources */,
 				4D59082122EAABD0006E0657 /* AppDelegate.m in Sources */,
+				4D3D3B5622F0492F00024A97 /* PieCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,8 +588,10 @@
 		};
 		4D59084922EAABD0006E0657 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E21022F6CE25365DCCE4E602 /* Pods-GitProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3YBNP29DB;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -460,14 +603,19 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sunmi.com.GitProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GitProject/GitProject-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		4D59084A22EAABD0006E0657 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD80FA25C33DC6B5A33F6AE0 /* Pods-GitProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3YBNP29DB;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -479,6 +627,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sunmi.com.GitProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GitProject/GitProject-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -486,6 +636,7 @@
 		4D59084C22EAABD0006E0657 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3YBNP29DB;
@@ -505,6 +656,7 @@
 		4D59084D22EAABD0006E0657 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3YBNP29DB;
@@ -524,6 +676,7 @@
 		4D59084F22EAABD0006E0657 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3YBNP29DB;
 				INFOPLIST_FILE = GitProjectUITests/Info.plist;
@@ -542,6 +695,7 @@
 		4D59085022EAABD0006E0657 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3YBNP29DB;
 				INFOPLIST_FILE = GitProjectUITests/Info.plist;

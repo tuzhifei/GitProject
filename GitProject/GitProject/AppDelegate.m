@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "TABAnimated.h"
+
 @interface AppDelegate ()
 
 @end
@@ -17,6 +19,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [[TABAnimated sharedAnimated] initWithShimmerAnimated];
+    // open log
+    // 开启日志
+    [TABAnimated sharedAnimated].openLog = YES;
+    // set gobal cornerRadius
+    [TABAnimated sharedAnimated].useGlobalCornerRadius = YES;
+    // 是否开启动画坐标标记，如果开启，也仅在debug环境下有效。
+
+    
     ViewController *vc = [[ViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     [self.window setRootViewController:nav];
