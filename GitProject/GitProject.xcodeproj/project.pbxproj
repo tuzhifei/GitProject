@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D3D3B4322F01C2D00024A97 /* UIColor+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B3F22F01C2D00024A97 /* UIColor+Extention.m */; };
+		4D3D3B4422F01C2D00024A97 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D3B4022F01C2D00024A97 /* UIView+Frame.m */; };
 		4D59082122EAABD0006E0657 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D59082022EAABD0006E0657 /* AppDelegate.m */; };
 		4D59082422EAABD0006E0657 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D59082322EAABD0006E0657 /* ViewController.m */; };
 		4D59082722EAABD0006E0657 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D59082522EAABD0006E0657 /* Main.storyboard */; };
@@ -35,6 +37,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D3D3B3F22F01C2D00024A97 /* UIColor+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extention.m"; sourceTree = "<group>"; };
+		4D3D3B4022F01C2D00024A97 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		4D3D3B4122F01C2D00024A97 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		4D3D3B4222F01C2D00024A97 /* UIColor+Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extention.h"; sourceTree = "<group>"; };
+		4D3D3B4522F01C6600024A97 /* GitProject.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitProject.pch; sourceTree = "<group>"; };
 		4D59081C22EAABD0006E0657 /* GitProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D59081F22EAABD0006E0657 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4D59082022EAABD0006E0657 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -105,11 +112,16 @@
 				4D59082022EAABD0006E0657 /* AppDelegate.m */,
 				4D59082222EAABD0006E0657 /* ViewController.h */,
 				4D59082322EAABD0006E0657 /* ViewController.m */,
+				4D3D3B4222F01C2D00024A97 /* UIColor+Extention.h */,
+				4D3D3B3F22F01C2D00024A97 /* UIColor+Extention.m */,
+				4D3D3B4122F01C2D00024A97 /* UIView+Frame.h */,
+				4D3D3B4022F01C2D00024A97 /* UIView+Frame.m */,
 				4D59082522EAABD0006E0657 /* Main.storyboard */,
 				4D59082822EAABD0006E0657 /* Assets.xcassets */,
 				4D59082A22EAABD0006E0657 /* LaunchScreen.storyboard */,
 				4D59082D22EAABD0006E0657 /* Info.plist */,
 				4D59082E22EAABD0006E0657 /* main.m */,
+				4D3D3B4522F01C6600024A97 /* GitProject.pch */,
 			);
 			path = GitProject;
 			sourceTree = "<group>";
@@ -262,8 +274,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D3D3B4322F01C2D00024A97 /* UIColor+Extention.m in Sources */,
 				4D59082422EAABD0006E0657 /* ViewController.m in Sources */,
 				4D59082F22EAABD0006E0657 /* main.m in Sources */,
+				4D3D3B4422F01C2D00024A97 /* UIView+Frame.m in Sources */,
 				4D59082122EAABD0006E0657 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,6 +451,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3YBNP29DB;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/GitProject/GitProject.pch";
 				INFOPLIST_FILE = GitProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -454,6 +470,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3YBNP29DB;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/GitProject/GitProject.pch";
 				INFOPLIST_FILE = GitProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
