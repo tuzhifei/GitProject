@@ -1,0 +1,9 @@
+target 'GitProject' do
+    platform :ios , '9.0'
+    pod 'MJRefresh'
+    pod 'PNChart', '~> 0.8.9'
+    pod 'Charts', '~> 3.3.0'
+    pod 'TABAnimated'
+    use_frameworks!
+end
+

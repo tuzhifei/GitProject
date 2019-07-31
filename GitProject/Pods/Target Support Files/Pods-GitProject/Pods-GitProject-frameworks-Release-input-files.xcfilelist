@@ -1,0 +1,6 @@
+${PODS_ROOT}/Target Support Files/Pods-GitProject/Pods-GitProject-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Charts/Charts.framework
+${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework
+${BUILT_PRODUCTS_DIR}/PNChart/PNChart.framework
+${BUILT_PRODUCTS_DIR}/TABAnimated/TABAnimated.framework
+${BUILT_PRODUCTS_DIR}/UICountingLabel/UICountingLabel.framework
