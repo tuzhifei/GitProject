@@ -26,6 +26,9 @@
 		4D59082F22EAABD0006E0657 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D59082E22EAABD0006E0657 /* main.m */; };
 		4D59083922EAABD0006E0657 /* GitProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D59083822EAABD0006E0657 /* GitProjectTests.m */; };
 		4D59084422EAABD0006E0657 /* GitProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D59084322EAABD0006E0657 /* GitProjectUITests.m */; };
+		4D9E841722F8044F00DB3CF2 /* SKUTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E841322F8044F00DB3CF2 /* SKUTableViewCell.m */; };
+		4D9E841822F8044F00DB3CF2 /* SKUCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E841422F8044F00DB3CF2 /* SKUCollectionViewCell.m */; };
+		4D9E841B22F8049E00DB3CF2 /* SaleRankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E841A22F8049E00DB3CF2 /* SaleRankModel.m */; };
 		8ADD0A2A378A728F9CFFF34D /* Pods_GitProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8546023AB273620EE0FB7F /* Pods_GitProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +91,12 @@
 		4D59083F22EAABD0006E0657 /* GitProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D59084322EAABD0006E0657 /* GitProjectUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitProjectUITests.m; sourceTree = "<group>"; };
 		4D59084522EAABD0006E0657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D9E841322F8044F00DB3CF2 /* SKUTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUTableViewCell.m; sourceTree = "<group>"; };
+		4D9E841422F8044F00DB3CF2 /* SKUCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKUCollectionViewCell.m; sourceTree = "<group>"; };
+		4D9E841522F8044F00DB3CF2 /* SKUTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUTableViewCell.h; sourceTree = "<group>"; };
+		4D9E841622F8044F00DB3CF2 /* SKUCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKUCollectionViewCell.h; sourceTree = "<group>"; };
+		4D9E841922F8049E00DB3CF2 /* SaleRankModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaleRankModel.h; sourceTree = "<group>"; };
+		4D9E841A22F8049E00DB3CF2 /* SaleRankModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaleRankModel.m; sourceTree = "<group>"; };
 		E21022F6CE25365DCCE4E602 /* Pods-GitProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitProject.debug.xcconfig"; path = "Target Support Files/Pods-GitProject/Pods-GitProject.debug.xcconfig"; sourceTree = "<group>"; };
 		FD80FA25C33DC6B5A33F6AE0 /* Pods-GitProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitProject.release.xcconfig"; path = "Target Support Files/Pods-GitProject/Pods-GitProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,8 +138,12 @@
 				4D3D3B4F22F0447400024A97 /* BarCollectionViewCell.m */,
 				4D3D3B5422F0492F00024A97 /* PieCollectionViewCell.h */,
 				4D3D3B5522F0492F00024A97 /* PieCollectionViewCell.m */,
+				4D9E841622F8044F00DB3CF2 /* SKUCollectionViewCell.h */,
+				4D9E841422F8044F00DB3CF2 /* SKUCollectionViewCell.m */,
 				4D3D3B6422F04D5000024A97 /* CountTableViewCell.h */,
 				4D3D3B6522F04D5000024A97 /* CountTableViewCell.m */,
+				4D9E841522F8044F00DB3CF2 /* SKUTableViewCell.h */,
+				4D9E841322F8044F00DB3CF2 /* SKUTableViewCell.m */,
 				4D3D3B6722F0562500024A97 /* PageCollectionView.h */,
 				4D3D3B6822F0562500024A97 /* PageCollectionView.m */,
 			);
@@ -140,6 +153,8 @@
 		4D3D3B5722F049B900024A97 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4D9E841922F8049E00DB3CF2 /* SaleRankModel.h */,
+				4D9E841A22F8049E00DB3CF2 /* SaleRankModel.m */,
 				4D3D3B6222F04CBB00024A97 /* PurchaseModel.h */,
 				4D3D3B6122F04CBB00024A97 /* PurchaseModel.m */,
 				4D3D3B5A22F049CB00024A97 /* SKUModel.h */,
@@ -413,11 +428,14 @@
 				4D59082F22EAABD0006E0657 /* main.m in Sources */,
 				4D3D3B6922F0562500024A97 /* PageCollectionView.m in Sources */,
 				4D3D3B6622F04D5000024A97 /* CountTableViewCell.m in Sources */,
+				4D9E841B22F8049E00DB3CF2 /* SaleRankModel.m in Sources */,
 				4D3D3B4422F01C2D00024A97 /* UIView+Frame.m in Sources */,
 				4D3D3B5322F044F000024A97 /* GitProject.swift in Sources */,
 				4D3D3B4C22F0231600024A97 /* CardCollectionViewCell.m in Sources */,
 				4D3D3B5022F0447400024A97 /* BarCollectionViewCell.m in Sources */,
 				4D3D3B5D22F049CB00024A97 /* SKUModel.m in Sources */,
+				4D9E841822F8044F00DB3CF2 /* SKUCollectionViewCell.m in Sources */,
+				4D9E841722F8044F00DB3CF2 /* SKUTableViewCell.m in Sources */,
 				4D59082122EAABD0006E0657 /* AppDelegate.m in Sources */,
 				4D3D3B5622F0492F00024A97 /* PieCollectionViewCell.m in Sources */,
 			);

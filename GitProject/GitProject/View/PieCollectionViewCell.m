@@ -37,6 +37,7 @@ typedef void(^SelectBlock)(NSInteger index);
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:self.pieChartView];
 //        [self.contentView addSubview:self.leftTable];
 //        [self.contentView addSubview:self.rightTable];

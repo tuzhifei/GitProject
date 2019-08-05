@@ -7,12 +7,13 @@
 //
 
 #import "ViewController.h"
+#import "PurchaseModel.h"
+#import "PageCollectionView.h"
 #import "CardCollectionViewCell.h"
 #import "BarCollectionViewCell.h"
 #import "PieCollectionViewCell.h"
-#import "PurchaseModel.h"
-#import "PageCollectionView.h"
-
+#import "SKUCollectionViewCell.h"
+#import "SaleRankModel.h"
 #define headHeight 90
 @interface ViewController ()<UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate>
 @property (nonatomic , assign) BOOL  isHover;
@@ -34,8 +35,6 @@
     [self.navigationController setNavigationBarHidden:YES];
 
     self.dataArray = [[NSMutableArray alloc]init];
-
-
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.headView];
     [self.scrollView addSubview:self.buttonView];
@@ -83,8 +82,7 @@
 - (PageCollectionView *)collectionView {
     if (_collectionView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-        [layout setSectionInset:UIEdgeInsetsMake(10, 10, 0, 10)];
-        CGFloat maxY = self.buttonView.bottom + 20;
+        CGFloat maxY = self.buttonView.bottom + 10;
         _collectionView = [[PageCollectionView alloc]initWithFrame:CGRectMake(0, maxY, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height - maxY + headHeight) collectionViewLayout:layout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -92,7 +90,9 @@
         [_collectionView registerClass:[CardCollectionViewCell class] forCellWithReuseIdentifier:[CardCollectionViewCell cellIdentifier]];
         [_collectionView registerClass:[BarCollectionViewCell class] forCellWithReuseIdentifier:[BarCollectionViewCell cellIdentifier]];
         [_collectionView registerClass:[PieCollectionViewCell class] forCellWithReuseIdentifier:[PieCollectionViewCell cellIdentifier]];
-        
+        [_collectionView registerClass:[SKUCollectionViewCell class] forCellWithReuseIdentifier:[SKUCollectionViewCell cellIdentifier]];
+        //ViewBorderRadius(_collectionView, 1, 3, [UIColor RandomColor]);
+
         
         NSArray *classArray = @[
                                 [CardCollectionViewCell class],
@@ -114,7 +114,6 @@
                                                                      animatedCountArray:@[@(4)]
                                                                    animatedSectionArray:@[@(0)]];
 
-        ViewBorderRadius(_collectionView, 1, 3, [UIColor RandomColor]);
         
    
     }
@@ -122,7 +121,7 @@
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -132,30 +131,39 @@
     return 1;
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        CardCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[CardCollectionViewCell cellIdentifier] forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor whiteColor];
-        return cell;
+        CardCollectionViewCell *cardCell = [CardCollectionViewCell cellWithIndexPath:indexPath atCollectionView:collectionView];
+        return cardCell;
     } else if (indexPath.section == 1) {
-        BarCollectionViewCell *barCell = [collectionView dequeueReusableCellWithReuseIdentifier:[BarCollectionViewCell cellIdentifier] forIndexPath:indexPath];
-        barCell.backgroundColor = [UIColor whiteColor];
+        BarCollectionViewCell *barCell = [BarCollectionViewCell cellWithIndexPath:indexPath atCollectionView:collectionView];
         return barCell;
-    } else {
+    } else if (indexPath.section == 2) {
         PieCollectionViewCell *pieCell = [PieCollectionViewCell cellWithIndexPath:indexPath atCollectionView:collectionView];
-        pieCell.backgroundColor = [UIColor whiteColor];
         [pieCell reloadWithModel:[self offViewData]];
         return pieCell;
+    } else {
+        SKUCollectionViewCell *skuCell = [SKUCollectionViewCell cellWithIndexPath:indexPath atCollectionView:collectionView];
+        [skuCell reloadWithDataSource:[self skuData]];
+        return skuCell;
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return [CardCollectionViewCell cellSize];
+    } else if (indexPath.section == 3) {
+        return [SKUCollectionViewCell cellSize];
+    } else {
+        return [BarCollectionViewCell cellSize];
     }
-    return [BarCollectionViewCell cellSize];
 }
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+}
+
+
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 15;
@@ -238,6 +246,19 @@
         [officeArr addObject:model];
     }
     return officeArr;
+}
+
+- (NSMutableArray <SaleRankModel *> *)skuData {
+    NSMutableArray <SaleRankModel *> *skuData = [NSMutableArray new];
+    NSArray *name = @[@"汉堡", @"食用酒水", @"土豆", @"牛奶", @"母婴产品", @"水果", @"西瓜", @"桃子", @"香蕉", @"南瓜"];
+    for (int i = 0; i < name.count; i++) {
+        SaleRankModel *model = [[SaleRankModel alloc]init];
+        model.name = name[i];
+        model.rank = i + 1;
+        model.quantity = arc4random_uniform(1000);
+        [skuData addObject:model];
+    }
+    return skuData;
 }
 
 @end

@@ -33,14 +33,15 @@ typedef void(^SelectBlock)(NSInteger index);
 }
 
 + (instancetype)cellWithIndexPath:(NSIndexPath *)indexPath atCollectionView:(UICollectionView *)collectionView {
+    NSLog(@"identify: %@", [self cellIdentifier]);
     return [collectionView dequeueReusableCellWithReuseIdentifier:[self cellIdentifier] forIndexPath:indexPath];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        ViewBorderRadius(self, 6, 1, [UIColor RandomColor]);
-        self.backgroundColor = [UIColor RandomColor];
+        ViewBorderRadius(self, 6, 1, [UIColor lightGrayColor]);
+        self.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:self.titleLab];
         [self.contentView addSubview:self.buttonView];
         [self loadBtnView];
@@ -73,6 +74,7 @@ typedef void(^SelectBlock)(NSInteger index);
 - (UIView *)buttonView {
     if (_buttonView == nil) {
         _buttonView = [[UIView alloc]init];
+        _buttonView.backgroundColor = [UIColor whiteColor];
 //        ViewBorderRadius(_buttonView, 12, .05f, RGB(133, 133, 133));
     }
     return _buttonView;
