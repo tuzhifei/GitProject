@@ -50,20 +50,27 @@ typedef void(^SelectBlock)(NSInteger index);
         _pieChartView = [[PieChartView alloc] init];
         _pieChartView.delegate = self;
         _pieChartView.backgroundColor = [UIColor clearColor];
-        [_pieChartView setExtraOffsetsWithLeft:0 top:0 right:0 bottom:0];//饼状图距离边缘的间隙
+        [_pieChartView setExtraOffsetsWithLeft:0 top:10 right:0 bottom:10];//饼状图距离边缘的间隙
         _pieChartView.usePercentValuesEnabled = YES;//是否根据所提供的数据, 将显示数据转换为百分比格式
         _pieChartView.dragDecelerationEnabled = YES;//拖拽饼状图后是否有惯性效果
         _pieChartView.drawCenterTextEnabled = NO;//是否显示区块文本
         _pieChartView.dragDecelerationEnabled = NO;
         _pieChartView.drawHoleEnabled = YES;//饼状图是否是空心
-        _pieChartView.holeRadiusPercent = 0.6;//空心半径占比
+        _pieChartView.holeRadiusPercent = 0.7;//空心半径占比
         _pieChartView.holeColor = [UIColor clearColor];//空心颜色
         _pieChartView.transparentCircleRadiusPercent = 0.52;//半透明空心半径占比
         _pieChartView.transparentCircleColor = [UIColor colorWithRed:210/255.0 green:145/255.0 blue:165/255.0 alpha:0.3];//半透明空心的颜色
         _pieChartView.noDataText = @"暂无数据";
         _pieChartView.noDataTextColor = [UIColor redColor];
         ViewBorderRadius(_pieChartView, 1, 3, [UIColor clearColor]);
-
+        
+        _pieChartView.drawCenterTextEnabled = YES;//是否绘制中间的文本
+        NSString *text = @"我是中心";
+        NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:text];
+        NSDictionary *dic = @{NSForegroundColorAttributeName: [UIColor cyanColor],
+                              NSFontAttributeName: [UIFont systemFontOfSize:12]};
+        [attribute setAttributes:dic range:NSMakeRange(0, text.length)];
+        _pieChartView.centerAttributedText = attribute;
         _pieChartView.legend.enabled = false;
     }
     return _pieChartView;
@@ -138,10 +145,8 @@ typedef void(^SelectBlock)(NSInteger index);
     [super layoutSubviews];
     CGFloat width = self.contentView.bounds.size.width;
     CGFloat height = self.contentView.bounds.size.height;
-    self.pieChartView.frame = CGRectMake(105, 60, width  - 210, height - 100);
-    self.leftTable.frame = CGRectMake(24, self.pieChartView.top, self.pieChartView.left - 24, self.pieChartView.height + 20);
-    self.rightTable.frame = CGRectMake(self.pieChartView.right, self.pieChartView.top, self.leftTable.width + 15, self.pieChartView.height + 20);
-    
+    self.pieChartView.frame = CGRectMake(10, self.titleLab.bottom + 10, width  - 20, height - self.titleLab.bottom - 10);
+//    ViewBorderRadius(self.pieChartView, 1, 3, [UIColor RandomColor]);
 }
 
 //- (void)reloadWithDataArray:(NSArray <PieModel*> *)dataSource {
@@ -168,7 +173,7 @@ typedef void(^SelectBlock)(NSInteger index);
     if (type == 0) {
         for (int i = 0; i < pieArr.count; i++) {
             PurchaseModel *model = pieArr[i];
-            sumCount = model.total_amount;
+            sumCount = sumCount + model.amount;
             CGFloat percent = model.amount/sumCount;
             model.percent = percent;
             //NSString *legendStr = [NSString stringWithFormat:@"%@  |   %.1f%%", model.purchase_type_name, model.percent * 100];
@@ -180,7 +185,7 @@ typedef void(^SelectBlock)(NSInteger index);
     } else {
         for (int i = 0; i < pieArr.count; i++) {
             PurchaseModel *model = pieArr[i];
-            sumCount = model.total_count;
+            sumCount = sumCount + model.count;
             CGFloat percent = model.count/sumCount;
             model.percent = percent;
             [colors addObject:model.color];
@@ -192,13 +197,30 @@ typedef void(^SelectBlock)(NSInteger index);
         PieChartDataSet *dataSet = [[PieChartDataSet alloc]initWithEntries:values label:@""];
         /* 设置每块扇形区块的颜色 */
         dataSet.colors = colors;
-        dataSet.sliceSpace = 0.0f; //相邻区块之间的间距
+        dataSet.sliceSpace = 3.0f; //相邻区块之间的间距
         dataSet.selectionShift = 8;//选中区块时, 放大的半径
         dataSet.drawIconsEnabled = NO; //扇形区块是否显示图片
-        dataSet.entryLabelColor = [UIColor clearColor];//每块扇形文字描述的颜色
+        dataSet.entryLabelColor = [UIColor redColor];//每块扇形文字描述的颜色
         dataSet.entryLabelFont = [UIFont systemFontOfSize:10];//每块扇形的文字字体大小
         dataSet.valueFont = [UIFont systemFontOfSize:10];//每块扇形数值的字体大小
-        dataSet.drawValuesEnabled = NO;//是否显示每块扇形的数值
+        dataSet.drawValuesEnabled = YES;//是否显示每块扇形的数值
+        
+        dataSet.xValuePosition = PieChartValuePositionInsideSlice;//文字的位置
+        dataSet.yValuePosition = PieChartValuePositionOutsideSlice;//数值的位置，只有在外面的时候，折线才有用
+        dataSet.valueLinePart1OffsetPercentage = 0.5; //折线中第一段起始位置相对于区块的偏移量, 数值越大, 折线距离区块越远
+        dataSet.valueLinePart1Length = 0.4;//折线中第一段长度占比
+        dataSet.valueLinePart2Length = 0.6;//折线中第二段长度占比
+        dataSet.valueLineWidth = 1;//折线的粗细
+        dataSet.valueLineColor = [UIColor brownColor];//折线颜色
+        dataSet.valueTextColor = [UIColor redColor];
+        //设置每块扇形数值的格式
+        NSNumberFormatter *pFormatter = [[NSNumberFormatter alloc] init];
+        pFormatter.numberStyle = NSNumberFormatterPercentStyle;
+        pFormatter.maximumFractionDigits = 1;
+        pFormatter.multiplier = @1.f;
+        pFormatter.percentSymbol = @" %";
+        dataSet.valueFormatter = [[ChartDefaultValueFormatter alloc] initWithFormatter:pFormatter];
+        
         PieChartData *data = [[PieChartData alloc] initWithDataSet:dataSet];
         self.pieChartView.data = data;
     } else {
@@ -212,6 +234,9 @@ typedef void(^SelectBlock)(NSInteger index);
         self.pieChartView.data = data;
     }
     //    self.pieChartView.rotationAngle = 0.0;case linear
+    
+   
+    
     [self.pieChartView animateWithXAxisDuration:0.5f easingOption:ChartEasingOptionLinear];//设置动画效果
     
 }

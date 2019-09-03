@@ -14,6 +14,7 @@
 #import "PieCollectionViewCell.h"
 #import "SKUCollectionViewCell.h"
 #import "SaleRankModel.h"
+#import "LineChartCollectionViewCell.h"
 #define headHeight 90
 @interface ViewController ()<UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate>
 @property (nonatomic , assign) BOOL  isHover;
@@ -91,28 +92,30 @@
         [_collectionView registerClass:[BarCollectionViewCell class] forCellWithReuseIdentifier:[BarCollectionViewCell cellIdentifier]];
         [_collectionView registerClass:[PieCollectionViewCell class] forCellWithReuseIdentifier:[PieCollectionViewCell cellIdentifier]];
         [_collectionView registerClass:[SKUCollectionViewCell class] forCellWithReuseIdentifier:[SKUCollectionViewCell cellIdentifier]];
+        [_collectionView registerClass:[LineChartCollectionViewCell class] forCellWithReuseIdentifier:[LineChartCollectionViewCell cellIdentifier]];
+
         //ViewBorderRadius(_collectionView, 1, 3, [UIColor RandomColor]);
 
         
-        NSArray *classArray = @[
-                                [CardCollectionViewCell class],
+//        NSArray *classArray = @[
+//                                [CardCollectionViewCell class],
 //                                [BarCollectionViewCell class],
 //                                [PieCollectionViewCell class]
-                                ];
-        NSArray *sizeArray = @[
-                               [NSValue valueWithCGSize:[CardCollectionViewCell cellSize]],
+//                                ];
+//        NSArray *sizeArray = @[
+//                               [NSValue valueWithCGSize:[CardCollectionViewCell cellSize]],
 //                               [NSValue valueWithCGSize:[BarCollectionViewCell cellSize]],
 //                               [NSValue valueWithCGSize:[PieCollectionViewCell cellSize]],
-                               ];
+//                               ];
         
 //        _collectionView.tabAnimated = [TABCollectionAnimated
 //                                       animatedWithCellClassArray:classArray
 //                                       cellSizeArray:sizeArray
 //                                       animatedCountArray:@[@(4), @(1), @(1)]];
-        _collectionView.tabAnimated = [TABCollectionAnimated animatedWithCellClassArray:classArray
-                                                                          cellSizeArray:sizeArray
-                                                                     animatedCountArray:@[@(4)]
-                                                                   animatedSectionArray:@[@(0)]];
+//        _collectionView.tabAnimated = [TABCollectionAnimated animatedWithCellClassArray:classArray
+//                                                                          cellSizeArray:sizeArray
+//                                                                     animatedCountArray:@[@(4)]
+//                                                                   animatedSectionArray:@[@(0)]];
 
         
    
@@ -121,7 +124,7 @@
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -142,6 +145,9 @@
         PieCollectionViewCell *pieCell = [PieCollectionViewCell cellWithIndexPath:indexPath atCollectionView:collectionView];
         [pieCell reloadWithModel:[self offViewData]];
         return pieCell;
+    } else if (indexPath.section == 3) {
+        LineChartCollectionViewCell *lineChartCell = [LineChartCollectionViewCell cellWithIndexPath:indexPath atCollectionView:collectionView];
+        return lineChartCell;
     } else {
         SKUCollectionViewCell *skuCell = [SKUCollectionViewCell cellWithIndexPath:indexPath atCollectionView:collectionView];
         [skuCell reloadWithDataSource:[self skuData]];
@@ -152,9 +158,13 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return [CardCollectionViewCell cellSize];
+    }  else if (indexPath.section == 1) {
+        return [BarCollectionViewCell cellSize];
+    } else if (indexPath.section == 2) {
+        return [PieCollectionViewCell cellSize];
     } else if (indexPath.section == 3) {
-        return [SKUCollectionViewCell cellSize];
-    } else {
+        return [LineChartCollectionViewCell cellSize];
+    }  else {
         return [BarCollectionViewCell cellSize];
     }
 }
@@ -236,8 +246,8 @@
     for (int i = 0; i < name.count; i++) {
         PurchaseModel *model = [[PurchaseModel alloc]init];
         model.purchase_type_name = [NSString stringWithFormat:@"%@", name[i]];
-        model.total_count = (arc4random_uniform(50));
-        model.total_amount = (arc4random_uniform(50));
+        model.amount = (arc4random_uniform(50));
+        model.count = (arc4random_uniform(50));
         CGFloat red = (arc4random_uniform(255))/255.0;
         CGFloat green = (arc4random_uniform(235))/255.0;
         CGFloat blue = (arc4random_uniform(200))/255.0;
