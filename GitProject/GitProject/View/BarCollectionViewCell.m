@@ -7,13 +7,12 @@
 //
 
 #import "BarCollectionViewCell.h"
-#import "GitProject-Bridging-Header.h"
-#import "GitProject-Swift.h"
+#import "DateValueFormatter.h"
 
-@interface BarCollectionViewCell ()<IChartAxisValueFormatter>
+
+@interface BarCollectionViewCell ()
 
 @property(nonatomic, strong)BarChartView *barChartView;
-@property(nonatomic, strong)NSMutableArray *xValue;
 @property(nonatomic, assign)NSInteger type;
 
 @end
@@ -36,7 +35,7 @@
         [self.contentView addSubview:self.barChartView];
         [self setBarChartX];
         [self setBarChartY];
-        [self loadDataWithType:1];
+        [self loadDataWithType:self.type];
     }
     return self;
 }
@@ -54,7 +53,7 @@
         _barChartView.dragEnabled = NO;//启用拖拽图表
         _barChartView.dragDecelerationEnabled = YES;//拖拽后是否有惯性效果
         _barChartView.dragDecelerationFrictionCoef = 0.9;//拖拽后惯性效果的摩擦系数(0~1)，数值越小，惯性越不明显
-        _barChartView.xAxis.valueFormatter = self;
+//        _barChartView.xAxis.valueFormatter = self;
         _barChartView.legend.enabled = NO;//不显示图例说明
         _barChartView.rightAxis.enabled = NO;
         ViewBorderRadius(_barChartView, 1, 3, [UIColor clearColor]);
@@ -104,63 +103,43 @@
     self.barChartView.frame = CGRectMake(10, CGRectGetMaxY(self.titleLab.frame) + 10, self.contentView.bounds.size.width - 20, height - 60);
 }
 
-// 产生随机立柱数据
-- (void)loadDataWithType:(NSInteger)type {
+#pragma mark- 随机数据
+- (NSArray <BarChartDataEntry *> *)dataWithType:(NSInteger)type {
     NSMutableArray <BarChartDataEntry *> *yValues = [[NSMutableArray alloc]init];
-    [self.xValue removeAllObjects];
-    self.type = type;
-    switch (type) {
-        case 0:
-        {
-            for (int i = 0; i < 24; i ++) {
-                double y = (arc4random_uniform(50));
-                BarChartDataEntry *yEntry = [[BarChartDataEntry alloc] initWithX:i + 1 y:y];
-                [yValues addObject:yEntry];
-            }
-            [self.xValue addObjectsFromArray:@[@"00:00", @"01:00", @"02:00", @"03:00",@"04:00", @"05:00", @"06:00", @"07:00",@"08:00", @"09:00", @"10:00", @"11:00",@"12:00", @"13:00", @"14:00", @"15:00",@"16:00", @"17:00", @"18:00", @"19:00",@"20:00", @"21:00", @"22:00", @"23:00", @"24:00"]];
-        }
-            break;
-            
-        case 1:
-        {
-            for (int i = 0; i < 7; i ++) {
-                double y = (arc4random_uniform(50));
-                BarChartDataEntry *yEntry = [[BarChartDataEntry alloc] initWithX:i y:y];
-                [yValues addObject:yEntry];
-            }
-            [self.xValue addObjectsFromArray:@[@"周一", @"周二", @"周三", @"周四", @"周五", @"周六", @"周日"]];
-        }
-            break;
-            
-        case 2:
-        {
-            NSUInteger day = [self getMonthDay];
-            for (int i = 0; i < day; i ++) {
-                double y = (arc4random_uniform(50));
-                BarChartDataEntry *yEntry = [[BarChartDataEntry alloc] initWithX:i y:y];
-                [yValues addObject:yEntry];
-                NSString *dataStr = [NSString stringWithFormat:@"%d", i+1];
-                [self.xValue addObject:dataStr];
-            }
-        }
-            break;
-            
-        default:
-            break;
+    NSInteger xCount = 25;
+    if (type == 0) {
+        xCount = 25;
     }
+    else if (type == 1) {
+        xCount = 7;
+    }
+    else {
+        xCount = [self getMonthDay];
+    }
+    for (int i = 0; i < xCount; i ++) {
+        double y = (arc4random_uniform(100));
+        BarChartDataEntry *yEntry = [[BarChartDataEntry alloc] initWithX:i y:y];
+        [yValues addObject:yEntry];
+    }
+    return yValues;
+}
+
+#pragma mark- 加载数据
+- (void)loadDataWithType:(NSInteger)type {
+    NSArray <BarChartDataEntry *> *yValues = [self dataWithType:type];
     BarChartDataSet *set1 = [[BarChartDataSet alloc]initWithEntries:yValues label:@"data set"];
     set1.axisDependency = AxisDependencyLeft;
     //不在面板上直接显示数值
     set1.drawValuesEnabled = NO;
     set1.highlightEnabled = NO;
-    //    set1.roundedCorners = UIRectCornerTopLeft | UIRectCornerTopRight;
     [set1 setColor:RGB(41, 155, 255)];
     
     
     // 赋值数据
     BarChartData *data = [[BarChartData alloc] initWithDataSet:set1];
+    self.barChartView.xAxis.valueFormatter = [[DateValueFormatter alloc]initWithType:self.type];
     self.barChartView.data = data;
-    self.barChartView.xAxis.labelCount = self.xValue.count;
+    self.barChartView.xAxis.labelCount = yValues.count;
     self.barChartView.leftAxis.labelCount = 6;
 }
 
@@ -172,34 +151,5 @@
     return numberOfDaysInMonth;
 }
 
-- (NSString * _Nonnull)stringForValue:(double)value axis:(ChartAxisBase * _Nullable)axis {
-    NSString *xAxisStringValue = @"";
-    int myInt = (int)value;
-    if (self.xValue.count > myInt) {
-        if (self.type == 0) {
-            if (myInt%4 == 0) {
-                xAxisStringValue = [self.xValue objectAtIndex:myInt];
-            } else {
-                xAxisStringValue = @".";
-            }
-        } else if (self.type == 1) {
-            xAxisStringValue = [self.xValue objectAtIndex:myInt];
-        } else {
-            if ((myInt + 1)%6 == 0) {
-                xAxisStringValue = [self.xValue objectAtIndex:myInt];
-            } else {
-                xAxisStringValue = @".";
-            }
-        }
-    }
-    return xAxisStringValue;
-}
-
-- (NSMutableArray *)xValue {
-    if (_xValue == nil) {
-        _xValue = [[NSMutableArray alloc]init];
-    }
-    return _xValue;
-}
 
 @end

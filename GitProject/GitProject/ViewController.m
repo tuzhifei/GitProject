@@ -158,14 +158,18 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return [CardCollectionViewCell cellSize];
-    }  else if (indexPath.section == 1) {
+    }
+    else if (indexPath.section == 1) {
         return [BarCollectionViewCell cellSize];
-    } else if (indexPath.section == 2) {
+    }
+    else if (indexPath.section == 2) {
         return [PieCollectionViewCell cellSize];
-    } else if (indexPath.section == 3) {
+    }
+    else if (indexPath.section == 3) {
         return [LineChartCollectionViewCell cellSize];
-    }  else {
-        return [BarCollectionViewCell cellSize];
+    }
+    else {
+        return [SKUCollectionViewCell cellSize];
     }
 }
 
@@ -246,8 +250,8 @@
     for (int i = 0; i < name.count; i++) {
         PurchaseModel *model = [[PurchaseModel alloc]init];
         model.purchase_type_name = [NSString stringWithFormat:@"%@", name[i]];
-        model.amount = (arc4random_uniform(50));
-        model.count = (arc4random_uniform(50));
+        model.amount = (arc4random_uniform(200));
+        model.count = (arc4random_uniform(110));
         CGFloat red = (arc4random_uniform(255))/255.0;
         CGFloat green = (arc4random_uniform(235))/255.0;
         CGFloat blue = (arc4random_uniform(200))/255.0;

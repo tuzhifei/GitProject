@@ -7,16 +7,13 @@
 //
 
 #import "LineChartCollectionViewCell.h"
-#import "GitProject-Bridging-Header.h"
-#import "GitProject-Swift.h"
+#import "DateValueFormatter.h"
+#import "SymbolsValueFormatter.h"
 
-@interface LineChartCollectionViewCell ()<IChartAxisValueFormatter, ChartViewDelegate>
+@interface LineChartCollectionViewCell ()<ChartViewDelegate>
 
-@property (nonatomic,strong) LineChartView * lineView;//折线图
-@property (nonatomic,strong) UILabel * markY;
-@property (nonatomic, strong) LineChartDataSet *set1;//折线
-@property (nonatomic, strong) LineChartDataSet *set2;
-@property(nonatomic, strong)NSMutableArray *xValue;
+@property (nonatomic,strong)LineChartView * lineView;//折线图
+@property(nonatomic, strong)UILabel *markY;
 @property(nonatomic, assign)NSInteger type;
 
 @end
@@ -31,126 +28,112 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self setIsHidden:YES];
-        self.type = 1;
+        self.type = 2;
         [self.titleLab setText:@"折线图"];
         [self.contentView addSubview:self.lineView];
-        [self setBarChartX];
-        [self setBarChartY];
-        self.lineView.data = [self setData];
+        [self loadDataWithType:self.type];
     }
     return self;
 }
 
 - (LineChartView *)lineView {
     if (_lineView == nil) {
-        _lineView= [[LineChartView alloc] init];
+        _lineView = [[LineChartView alloc] init];
+        _lineView.delegate = self;
         _lineView.backgroundColor = [UIColor clearColor];
         _lineView.noDataText = @"暂无数据";//没有数据时的文字提示
+        _lineView.drawMarkers = YES;
         _lineView.scaleYEnabled = NO;//取消Y轴缩放
         _lineView.doubleTapToZoomEnabled = NO;//取消双击缩放
-        _lineView.dragEnabled = NO;//启用拖拽图表
+        _lineView.dragEnabled = YES;//启用拖拽图表
         _lineView.dragDecelerationEnabled = YES;//拖拽后是否有惯性效果
-        _lineView.dragDecelerationFrictionCoef = 0.9;//拖拽后惯性效果的摩擦系数(0~1)，数值越小，惯性越不明显
-        _lineView.xAxis.valueFormatter = self;
-        _lineView.legend.enabled = NO;//不显示图例说明
+        _lineView.dragDecelerationFrictionCoef = 0.9;
+        _lineView.legend.enabled = NO;
         _lineView.rightAxis.enabled = NO;
         
         ViewBorderRadius(_lineView, 1, 3, [UIColor clearColor]);
         
-        //设置滑动时候标签
-//        ChartMarkerView *markerY = [[ChartMarkerView alloc]
-//                                    init];
-//        markerY.offset = CGPointMake(-999, -8);
-//        markerY.chartView = _lineView;
-//        _lineView.marker = markerY;
-//        [markerY addSubview:self.markY];
+        BalloonMarker *marker = [[BalloonMarker alloc]
+                                 initWithColor: [UIColor colorWithWhite:180/255. alpha:1.0]
+                                 font: [UIFont systemFontOfSize:12.0]
+                                 textColor: UIColor.whiteColor
+                                 insets: UIEdgeInsetsMake(8.0, 8.0, 20.0, 8.0)];
+        marker.chartView = _lineView;
+        marker.minimumSize = CGSizeMake(80.f, 40.f);
+        _lineView.marker = marker;
      
-//        BalloonMarker *marker = [[BalloonMarker alloc]
-//                                 initWithColor: [UIColor colorWithWhite:180/255. alpha:1.0]
-//                                 font: [UIFont systemFontOfSize:12.0]
-//                                 textColor: UIColor.whiteColor
-//                                 insets: UIEdgeInsetsMake(8.0, 8.0, 20.0, 8.0)];
-//        marker.chartView = _lineView;
-//        marker.minimumSize = CGSizeMake(80.f, 40.f);
-//        _lineView.marker = marker;
-        //        _lineView.legend.form = ChartLegendFormLine;
-        
-        [self.lineView animateWithXAxisDuration:1.0f];
-        
+        [self lineChartX];
+        [self lineChartY];
+        _lineView.maxVisibleCount = 999;//
+        [_lineView animateWithXAxisDuration:1.0f];
     }
     return _lineView;
 }
 
+- (UILabel *)markY{
+    if (!_markY) {
+        _markY = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 35, 25)];
+        _markY.font = [UIFont systemFontOfSize:15.0];
+        _markY.textAlignment = NSTextAlignmentCenter;
+        _markY.text =@"";
+        _markY.textColor = [UIColor redColor];
+        _markY.backgroundColor = [UIColor grayColor];
+    }
+    return _markY;
+}
+
 #pragma mark- 设置X轴
-- (void)setBarChartX {
+- (void)lineChartX {
     ChartXAxis *xAxis = self.lineView.xAxis;
-    xAxis.axisLineWidth = 0.0f;//设置X轴线宽
-    xAxis.labelPosition = XAxisLabelPositionBottom;//X轴的显示位置，默认是显示在上面的
-    xAxis.drawGridLinesEnabled = NO;//不绘制网格线
-    xAxis.labelTextColor = [UIColor blackColor];
-    xAxis.labelFont = [UIFont systemFontOfSize:7];
+    xAxis.axisLineWidth = 0.0f;
+    xAxis.granularityEnabled = YES;//设置重复的值不显示
+    xAxis.labelPosition= XAxisLabelPositionBottom;//设置x轴数据在底部
+    xAxis.drawGridLinesEnabled = NO;
+    xAxis.axisLineColor = [UIColor grayColor];
+    xAxis.labelTextColor = [UIColor blackColor];//label文字颜色
+    xAxis.labelFont = [UIFont systemFontOfSize:8];
     xAxis.yOffset = 16.0f;
 }
 
-- (void)setBarChartY {
+#pragma mark- 设置Y轴
+- (void)lineChartY {
     ChartYAxis *leftAxis = self.lineView.leftAxis;//获取左边Y轴
-    leftAxis.inverted = NO;//是否将Y轴进行上下翻转
     leftAxis.axisLineWidth = 1;//Y轴线宽
-    leftAxis.forceLabelsEnabled = YES;
+    leftAxis.inverted = NO;//是否将Y轴进行上下翻转
     leftAxis.axisLineColor = [UIColor clearColor];//Y轴颜色
-    leftAxis.axisMinimum = 0;
+    leftAxis.labelPosition = YAxisLabelPositionOutsideChart;//label位置
+    leftAxis.labelTextColor = [UIColor blackColor];//文字颜色
+    leftAxis.labelFont = [UIFont systemFontOfSize:10.0f];//文字字体
+    leftAxis.gridAntialiasEnabled = NO;//开启抗锯齿
     leftAxis.gridLineDashLengths = @[@3.0f, @3.0f];//设置虚线样式的网格线
     leftAxis.gridColor = [UIColor colorWithRed:200/255.0f green:200/255.0f blue:200/255.0f alpha:1];//网格线颜色
-    leftAxis.gridAntialiasEnabled = YES;//开启抗锯齿
+    leftAxis.valueFormatter = [[SymbolsValueFormatter alloc]init];
 }
 
+- (NSArray <ChartDataEntry *> *)dataWithType:(NSInteger)type {
+    NSMutableArray <ChartDataEntry *> *yValues = [[NSMutableArray alloc]init];
+    NSInteger xCount = 25;
+    if (type == 0) {
+        xCount = 25;
+    }
+    else if (type == 1) {
+        xCount = 7;
+    }
+    else {
+        xCount = [self getMonthDay];
+    }
+    for (int i = 0; i < xCount; i ++) {
+        double y = (arc4random_uniform(100));
+        ChartDataEntry *yEntry = [[ChartDataEntry alloc] initWithX:i y:y];
+        [yValues addObject:yEntry];
+    }
+    return yValues;
+}
 
-- (LineChartData *)setData{
-    
-//    double maxYVal = 100;//Y轴的最大值
-    [self.xValue removeAllObjects];
-    
-    switch (self.type) {
-        case 0:
-        {
-            for (int i = 0; i < 25; i ++) {
-                NSString *dayStr = [NSString stringWithFormat:@"%02d:00", i];
-                [self.xValue addObject:dayStr];
-            }
-            
-        }
-            break;
-            
-        case 1:
-        {
-            [self.xValue addObjectsFromArray:@[@"周一", @"周二", @"周三", @"周四", @"周五", @"周六", @"周日"]];
-        }
-            break;
-            
-        case 2:
-        {
-            NSUInteger day = [self getMonthDay];
-            for (int i = 0; i < day; i ++) {
-                NSString *dataStr = [NSString stringWithFormat:@"%d", i+1];
-                [self.xValue addObject:dataStr];
-            }
-        }
-            break;
-            
-        default:
-            break;
-    }
-    NSInteger xCount = self.xValue.count;
-    //对应Y轴上面需要显示的数据
-    NSMutableArray *yVals = [[NSMutableArray alloc] init];
-    for (int i = 0; i < xCount; i++) {
-//        double mult = maxYVal + 1;
-        double val = (double)(arc4random_uniform(200));
-        ChartDataEntry *yEntry = [[ChartDataEntry alloc] initWithX:i y:val];
-        [yVals addObject:yEntry];
-    }
-    
-    LineChartDataSet *set1 = [[LineChartDataSet alloc]initWithEntries:yVals];
+#pragma mark- 产生随机立柱数据
+- (void)loadDataWithType:(NSInteger)type {
+    NSArray <ChartDataEntry *> *dataArr = [self dataWithType:type];
+    LineChartDataSet *set1 = [[LineChartDataSet alloc]initWithEntries:dataArr];
     set1.lineWidth = 2.0/[UIScreen mainScreen].scale;
     set1.axisDependency = AxisDependencyLeft;
     [set1 setCircleRadius:3.0f];
@@ -183,20 +166,14 @@
     set1.highlightLineWidth = 1.0/[UIScreen mainScreen].scale;//十字线宽度
     set1.highlightLineDashLengths = @[@5, @5];//十字线的虚线样式
     
-    //将 LineChartDataSet 对象放入数组中
-    NSMutableArray *dataSets = [[NSMutableArray alloc] init];
-    [dataSets addObject:set1];
-    
-    LineChartData *data = [[LineChartData alloc]initWithDataSets:dataSets];
-    if (self.type != 1) {
-        self.lineView.xAxis.labelCount = xCount;
-    }
-    self.lineView.leftAxis.labelCount = 6;
-    self.lineView.leftAxis.axisMaximum = 200;
+    LineChartData *data = [[LineChartData alloc]initWithDataSet:set1];
     self.lineView.leftAxis.axisMinimum = 0;
+    self.lineView.leftAxis.axisMaximum = 200;
+    self.lineView.leftAxis.labelCount = 6;
     self.lineView.leftAxis.forceLabelsEnabled = YES;
+    self.lineView.xAxis.valueFormatter = [[DateValueFormatter alloc]initWithType:self.type];
     self.lineView.data = data;
-    return data;
+    self.lineView.xAxis.labelCount = dataArr.count;
 }
 
 - (void)layoutSubviews {
@@ -206,11 +183,10 @@
 //    ViewBorderRadius(self.lineView, 1, 3, [UIColor RandomColor]);
 }
 
-- (NSMutableArray *)xValue {
-    if (_xValue == nil) {
-        _xValue = [[NSMutableArray alloc]init];
-    }
-    return _xValue;
+- (void)chartValueSelected:(ChartViewBase * _Nonnull)chartView entry:(ChartDataEntry * _Nonnull)entry highlight:(ChartHighlight * _Nonnull)highlight {
+    self.markY.text = [NSString stringWithFormat:@"%ld%%",(NSInteger)entry.y];
+    //将点击的数据滑动到中间
+    [self.lineView centerViewToAnimatedWithXValue:entry.x yValue:entry.y axis:[_lineView.data getDataSetByIndex:highlight.dataSetIndex].axisDependency duration:1.0];
 }
 
 #pragma mark- 获取当月天数
@@ -221,50 +197,6 @@
     return numberOfDaysInMonth;
 }
 
-- (NSString * _Nonnull)stringForValue:(double)value axis:(ChartAxisBase * _Nullable)axis {
-    NSString *xAxisStringValue = @"";
-    int myInt = (int)value;
-    if (self.type == 0) {
-        if (myInt % 4 == 0) {
-            xAxisStringValue = [self.xValue objectAtIndex:myInt];
-        }
-    } else if (self.type == 1) {
-        NSLog(@" %d %@ %@", myInt, self.xValue[myInt], self.xValue);
-        xAxisStringValue = [self.xValue objectAtIndex:myInt];
-    } else {
-        int month = myInt + 1;
-        NSInteger allDay = [self getMonthDay]; //总天数
-        if (month == 1) {
-            xAxisStringValue = [self.xValue objectAtIndex:0];
-        }
-        if (allDay == 30) {
-            if (month % 6 == 0) {
-                xAxisStringValue = [self.xValue objectAtIndex:myInt];
-            }
-        } else {
-            if (month % 6 == 0) {
-                xAxisStringValue = [self.xValue objectAtIndex:myInt];
-            }
-            if (allDay == 31) {
-                if (month == 30) {
-                    xAxisStringValue = @"";
-                }
-                if (month == 31) {
-                    xAxisStringValue = [self.xValue objectAtIndex:myInt];
-                }
-            } else if (allDay == 28) {
-                if (month == 28) {
-                    xAxisStringValue = [self.xValue objectAtIndex:myInt];
-                }
-            } else if (allDay == 29) {
-                if (month == 29) {
-                    xAxisStringValue = [self.xValue objectAtIndex:myInt];
-                }
-            }
-        }
-    }
-    return xAxisStringValue;
-}
 
 
 @end

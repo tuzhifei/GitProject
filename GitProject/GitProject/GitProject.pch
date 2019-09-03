@@ -15,4 +15,6 @@
 #import "UIColor+Extention.h"
 #import "GitProject.h"
 #import "TABAnimated.h"
+#import "GitProject-Bridging-Header.h"
+#import "GitProject-Swift.h"
 #endif /* GitProject_pch */
