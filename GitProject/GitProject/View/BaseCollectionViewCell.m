@@ -45,7 +45,6 @@ typedef void(^SelectBlock)(NSInteger index);
         [self.contentView addSubview:self.titleLab];
         [self.contentView addSubview:self.buttonView];
         [self loadBtnView];
-  
     }
     return self;
 }

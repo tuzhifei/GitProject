@@ -7,7 +7,45 @@
 		<key>GitProject.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>GitProjectOCLint.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>OCLintTest.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>6</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>4D5895C7234C661F00925573</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4D5895CC234C776E00925573</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4D59081B22EAABD0006E0657</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4D59083322EAABD0006E0657</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4D59083E22EAABD0006E0657</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

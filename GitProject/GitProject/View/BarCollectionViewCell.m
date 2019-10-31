@@ -56,6 +56,7 @@
 //        _barChartView.xAxis.valueFormatter = self;
         _barChartView.legend.enabled = NO;//不显示图例说明
         _barChartView.rightAxis.enabled = NO;
+        
         ViewBorderRadius(_barChartView, 1, 3, [UIColor clearColor]);
 //        [_barChartView tab_startAnimation];
 

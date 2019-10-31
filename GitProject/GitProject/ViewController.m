@@ -15,6 +15,7 @@
 #import "SKUCollectionViewCell.h"
 #import "SaleRankModel.h"
 #import "LineChartCollectionViewCell.h"
+#import "CollectionViewController.h"
 #define headHeight 90
 @interface ViewController ()<UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate>
 @property (nonatomic , assign) BOOL  isHover;
@@ -170,6 +171,13 @@
     }
     else {
         return [SKUCollectionViewCell cellSize];
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        CollectionViewController *collectonVc = [CollectionViewController new];
+        [self.navigationController pushViewController:collectonVc animated:YES];
     }
 }
 

@@ -28,7 +28,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self setIsHidden:YES];
-        self.type = 2;
+        self.type = 1;
         [self.titleLab setText:@"折线图"];
         [self.contentView addSubview:self.lineView];
         [self loadDataWithType:self.type];
@@ -54,9 +54,9 @@
         ViewBorderRadius(_lineView, 1, 3, [UIColor clearColor]);
         
         BalloonMarker *marker = [[BalloonMarker alloc]
-                                 initWithColor: [UIColor colorWithWhite:180/255. alpha:1.0]
+                                 initWithColor: [UIColor whiteColor]
                                  font: [UIFont systemFontOfSize:12.0]
-                                 textColor: UIColor.whiteColor
+                                 textColor:[UIColor blackColor]
                                  insets: UIEdgeInsetsMake(8.0, 8.0, 20.0, 8.0)];
         marker.chartView = _lineView;
         marker.minimumSize = CGSizeMake(80.f, 40.f);
@@ -172,8 +172,8 @@
     self.lineView.leftAxis.labelCount = 6;
     self.lineView.leftAxis.forceLabelsEnabled = YES;
     self.lineView.xAxis.valueFormatter = [[DateValueFormatter alloc]initWithType:self.type];
-    self.lineView.data = data;
     self.lineView.xAxis.labelCount = dataArr.count;
+    self.lineView.data = data;
 }
 
 - (void)layoutSubviews {
@@ -184,9 +184,10 @@
 }
 
 - (void)chartValueSelected:(ChartViewBase * _Nonnull)chartView entry:(ChartDataEntry * _Nonnull)entry highlight:(ChartHighlight * _Nonnull)highlight {
-    self.markY.text = [NSString stringWithFormat:@"%ld%%",(NSInteger)entry.y];
+    NSLog(@"didSelected X:%.2f  Y:%.2f ", entry.x, entry.y);
+//    self.markY.text = [NSString stringWithFormat:@"%ld%%",(NSInteger)entry.y];
     //将点击的数据滑动到中间
-    [self.lineView centerViewToAnimatedWithXValue:entry.x yValue:entry.y axis:[_lineView.data getDataSetByIndex:highlight.dataSetIndex].axisDependency duration:1.0];
+//    [self.lineView centerViewToAnimatedWithXValue:entry.x yValue:entry.y axis:[_lineView.data getDataSetByIndex:highlight.dataSetIndex].axisDependency duration:1.0];
 }
 
 #pragma mark- 获取当月天数
@@ -196,7 +197,6 @@
     NSUInteger numberOfDaysInMonth = range.length;
     return numberOfDaysInMonth;
 }
-
 
 
 @end

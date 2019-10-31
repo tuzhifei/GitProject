@@ -50,19 +50,16 @@ typedef void(^SelectBlock)(NSInteger index);
         _pieChartView = [[PieChartView alloc] init];
         _pieChartView.delegate = self;
         _pieChartView.backgroundColor = [UIColor clearColor];
-        [_pieChartView setExtraOffsetsWithLeft:5.f top:10.f right:5.f bottom:5.f];
+        [_pieChartView setExtraOffsetsWithLeft:10.f top:20.f right:10.f bottom:20.f];
         _pieChartView.usePercentValuesEnabled = YES;//是否根据所提供的数据, 将显示数据转换为百分比格式
         _pieChartView.dragDecelerationEnabled = YES;//拖拽饼状图后是否有惯性效果
-        _pieChartView.drawCenterTextEnabled = YES;//是否显示区块文本
-        _pieChartView.dragDecelerationEnabled = NO;
         _pieChartView.drawHoleEnabled = YES;//饼状图是否是空心
-        _pieChartView.holeRadiusPercent = 0.5;//空心半径占比
+        _pieChartView.holeRadiusPercent = 0.8;//空心半径占比
         _pieChartView.holeColor = [UIColor clearColor];//空心颜色
         _pieChartView.transparentCircleRadiusPercent = 0.52;//半透明空心半径占比
         _pieChartView.transparentCircleColor = [UIColor colorWithRed:210/255.0 green:145/255.0 blue:165/255.0 alpha:0.3];//半透明空心的颜色
         _pieChartView.noDataText = @"暂无数据";
         _pieChartView.noDataTextColor = [UIColor redColor];
-        _pieChartView.entryLabelColor = [UIColor purpleColor];
         ViewBorderRadius(_pieChartView, 1, 3, [UIColor clearColor]);
         _pieChartView.drawCenterTextEnabled = YES;//是否绘制中间的文本
         NSString *text = @"我是中心";
@@ -197,21 +194,22 @@ typedef void(^SelectBlock)(NSInteger index);
         PieChartDataSet *dataSet = [[PieChartDataSet alloc]initWithEntries:values label:@""];
         /* 设置每块扇形区块的颜色 */
         dataSet.colors = colors;
-        dataSet.sliceSpace = 3.0f; //相邻区块之间的间距
+        dataSet.sliceSpace = 0.0f; //相邻区块之间的间距
         dataSet.selectionShift = 8;//选中区块时, 放大的半径
         dataSet.drawIconsEnabled = NO; //扇形区块是否显示图片
-        dataSet.entryLabelColor = [UIColor whiteColor];//每块扇形文字描述的颜色
+        dataSet.entryLabelColor = [UIColor clearColor];//每块扇形文字描述的颜色
         dataSet.entryLabelFont = [UIFont systemFontOfSize:8];//每块扇形的文字字体大小
         dataSet.valueFont = [UIFont systemFontOfSize:10];//每块扇形数值的字体大小
         dataSet.drawValuesEnabled = YES;//是否显示每块扇形的数值
         //折线
         dataSet.xValuePosition = PieChartValuePositionInsideSlice;//文字的位置
         dataSet.yValuePosition = PieChartValuePositionOutsideSlice;//数值的位置，只有在外面的时候，折线才有用
-        dataSet.valueLinePart1OffsetPercentage = 0.5; //折线中第一段起始位置相对于区块的偏移量, 数值越大, 折线距离区块越远
-        dataSet.valueLinePart1Length = 0.4;//折线中第一段长度占比
-        dataSet.valueLinePart2Length = 0.6;//折线中第二段长度占比
+        dataSet.valueLinePart1OffsetPercentage = 1.2f; //折线中第一段起始位置相对于区块的偏移量, 数值越大, 折线距离区块越远
+        dataSet.valueLinePart1Length = 0.5;//折线中第一段长度占比
+        dataSet.valueLinePart2Length = 1;//折线中第二段长度占比
         dataSet.valueLineWidth = 1;//折线的粗细
-        dataSet.valueLineColor = [UIColor brownColor];//折线颜色
+//        dataSet.valueLineColor = [UIColor brownColor];//折线颜色
+        dataSet.useValueColorForLine = YES;
         dataSet.valueTextColor = [UIColor redColor];
         //设置每块扇形数值的格式
         NSNumberFormatter *pFormatter = [[NSNumberFormatter alloc] init];

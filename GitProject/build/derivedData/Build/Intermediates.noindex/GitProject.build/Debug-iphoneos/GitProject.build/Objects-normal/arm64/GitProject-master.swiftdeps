@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+options: "01b72a50cdc1323663b1610d49042306"
+build_time: [1570524009, 467703000]
+inputs:
+  "/Users/mark/GitProject/GitProject/GitProject/View/BalloonMarker.swift": [1560079822, 0]
+  "/Users/mark/GitProject/GitProject/GitProject/GitProject.swift": [1564478832, 238520455]
